@@ -1,3 +1,5 @@
+import { BookOpen, Code2, Layout, FileCode, PenTool, Database, Globe, Layers, GitBranch, Terminal, Server, Shield, Smartphone, Cpu } from 'lucide-react';
+
 export interface Lesson {
   id: string;
   title: string;
@@ -247,6 +249,115 @@ HTML supports ordered lists (\`<ol>\`) and unordered lists (\`<ul>\`).
           `
         },
         xpReward: 15
+      },
+      {
+        id: 'html-forms',
+        title: 'HTML Forms & Validation',
+        description: 'Create interactive forms with built-in validation',
+        content: `
+# HTML Forms & Validation
+
+Forms are essential for collecting user input on web pages. HTML5 provides built-in validation features to ensure data quality.
+
+## Form Elements
+
+\`\`\`html
+<form action="/submit" method="POST">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required minlength="3">
+  
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required>
+  
+  <label for="password">Password:</label>
+  <input type="password" id="password" name="password" required minlength="8">
+  
+  <button type="submit">Submit</button>
+</form>
+\`\`\`
+
+## Input Types
+
+- text: Basic text input
+- email: Email validation
+- password: Password field
+- number: Numeric input
+- tel: Phone numbers
+- date: Date picker
+- color: Color picker
+- file: File upload
+- checkbox: Multiple selections
+- radio: Single selection
+`,
+        challenge: {
+          description: 'Create a registration form with proper validation',
+          startingCode: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+</head>
+<body>
+  <!-- Create your form here -->
+  
+</body>
+</html>
+`,
+          solution: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    form { max-width: 400px; margin: 20px auto; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input { width: 100%; padding: 8px; }
+    button { padding: 10px 20px; background: #4CAF50; color: white; border: none; }
+  </style>
+</head>
+<body>
+  <form id="registrationForm" onsubmit="return validateForm()">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required minlength="3">
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required minlength="8">
+    </div>
+    
+    <div class="form-group">
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
+    </div>
+    
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>
+`
+        },
+        xpReward: 20
       }
     ]
   },
@@ -903,381 +1014,129 @@ element.addEventListener('click', handleClick);
 element.removeEventListener('click', handleClick);
 \`\`\`
         `,
-        codeExample: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>DOM Manipulation Demo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    .container {
-      border: 1px solid #ccc;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .highlight {
-      background-color: yellow;
-      padding: 2px 5px;
-    }
-    
-    button {
-      padding: 8px 12px;
-      margin-right: 10px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    #colorBox {
-      width: 100px;
-      height: 100px;
-      background-color: red;
-      margin: 20px 0;
-    }
-    
-    #items li {
-      margin-bottom: 5px;
-    }
-  </style>
-</head>
-<body>
-  <h1>DOM Manipulation Examples</h1>
-  
-  <div class="container">
-    <h2>Text Manipulation</h2>
-    <p id="textExample">This is a paragraph that will be changed.</p>
-    <button onclick="changeText()">Change Text</button>
-    <button onclick="changeHTML()">Change HTML</button>
-  </div>
-  
-  <div class="container">
-    <h2>Style Manipulation</h2>
-    <div id="colorBox"></div>
-    <button onclick="changeColor()">Change Color</button>
-    <button onclick="toggleHighlight()">Toggle Highlight</button>
-  </div>
-  
-  <div class="container">
-    <h2>Element Creation & Manipulation</h2>
-    <ul id="items">
-      <li>Item 1</li>
-      <li>Item 2</li>
-    </ul>
-    <button onclick="addItem()">Add Item</button>
-    <button onclick="removeItem()">Remove Last Item</button>
-  </div>
-  
-  <script>
-    // Text manipulation functions
-    function changeText() {
-      document.getElementById('textExample').textContent = 'The text has been changed!';
-    }
-    
-    function changeHTML() {
-      document.getElementById('textExample').innerHTML = 'This text has <span class="highlight">highlighted</span> parts!';
-    }
-    
-    // Style manipulation functions
-    function changeColor() {
-      const colorBox = document.getElementById('colorBox');
-      const colors = ['red', 'blue', 'green', 'purple', 'orange'];
-      const currentColor = colorBox.style.backgroundColor;
-      
-      // Find current color index
-      let currentIndex = colors.indexOf(currentColor);
-      if (currentIndex === -1) currentIndex = 0;
-      
-      // Set next color
-      const nextIndex = (currentIndex + 1) % colors.length;
-      colorBox.style.backgroundColor = colors[nextIndex];
-    }
-    
-    function toggleHighlight() {
-      const colorBox = document.getElementById('colorBox');
-      colorBox.classList.toggle('highlight');
-    }
-    
-    // Element creation & manipulation functions
-    let itemCount = 2;
-    
-    function addItem() {
-      itemCount++;
-      const newItem = document.createElement('li');
-      newItem.textContent = 'Item ' + itemCount;
-      document.getElementById('items').appendChild(newItem);
-    }
-    
-    function removeItem() {
-      const itemsList = document.getElementById('items');
-      if (itemsList.children.length > 0) {
-        itemsList.removeChild(itemsList.lastElementChild);
-        itemCount--;
-      }
-    }
-  </script>
-</body>
-</html>
-        `,
         challenge: {
-          description: 'Create a simple to-do list application using DOM manipulation',
+          description: 'Create a function that fetches user data and handles errors appropriately',
           startingCode: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>To-Do List App</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    
-    .todo-container {
-      margin-top: 20px;
-    }
-    
-    .todo-header {
-      display: flex;
-      margin-bottom: 20px;
-    }
-    
-    #todoInput {
-      flex: 1;
-      padding: 8px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 4px 0 0 4px;
-    }
-    
-    #addButton {
-      padding: 8px 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-    }
-    
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    
-    li {
-      padding: 12px;
-      margin-bottom: 8px;
-      background-color: #f9f9f9;
-      border-radius: 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .delete-btn {
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    .completed {
-      text-decoration: line-through;
-      opacity: 0.7;
-    }
-  </style>
-</head>
-<body>
-  <h1>To-Do List App</h1>
-  
-  <div class="todo-container">
-    <div class="todo-header">
-      <input type="text" id="todoInput" placeholder="Add a new task...">
-      <button id="addButton">Add</button>
-    </div>
-    
-    <ul id="todoList">
-      <!-- Todo items will be added here -->
-    </ul>
-  </div>
-  
-  <script>
-    // Write your JavaScript code here
-    
-  </script>
-</body>
-</html>
-          `,
+async function fetchUserData(userId) {
+  // Implement the function
+}
+
+// Test the function
+fetchUserData(1);
+`,
           solution: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>To-Do List App</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
+async function fetchUserData(userId) {
+  try {
+    const response = await fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`);
+    
+    if (!response.ok) {
+      throw new Error('User not found');
     }
     
-    h1 {
-      text-align: center;
-      color: #333;
-    }
+    const userData = await response.json();
+    console.log('User data:', userData);
+    return userData;
     
-    .todo-container {
-      margin-top: 20px;
-    }
-    
-    .todo-header {
-      display: flex;
-      margin-bottom: 20px;
-    }
-    
-    #todoInput {
-      flex: 1;
-      padding: 8px;
-      font-size: 16px;
-      border: 1px solid #ddd;
-      border-radius: 4px 0 0 4px;
-    }
-    
-    #addButton {
-      padding: 8px 16px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-    }
-    
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    
-    li {
-      padding: 12px;
-      margin-bottom: 8px;
-      background-color: #f9f9f9;
-      border-radius: 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .delete-btn {
-      background-color: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    
-    .completed {
-      text-decoration: line-through;
-      opacity: 0.7;
-    }
-  </style>
-</head>
-<body>
-  <h1>To-Do List App</h1>
-  
-  <div class="todo-container">
-    <div class="todo-header">
-      <input type="text" id="todoInput" placeholder="Add a new task...">
-      <button id="addButton">Add</button>
-    </div>
-    
-    <ul id="todoList">
-      <!-- Todo items will be added here -->
-    </ul>
-  </div>
-  
-  <script>
-    // Get DOM elements
-    const todoInput = document.getElementById('todoInput');
-    const addButton = document.getElementById('addButton');
-    const todoList = document.getElementById('todoList');
-    
-    // Add event listeners
-    addButton.addEventListener('click', addTodo);
-    todoInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        addTodo();
-      }
-    });
-    
-    // Function to add a new todo
-    function addTodo() {
-      const todoText = todoInput.value.trim();
-      
-      if (todoText === '') {
-        alert('Please enter a task!');
-        return;
-      }
-      
-      // Create new list item
-      const li = document.createElement('li');
-      
-      // Create text span
-      const textSpan = document.createElement('span');
-      textSpan.textContent = todoText;
-      textSpan.addEventListener('click', toggleComplete);
-      
-      // Create delete button
-      const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Delete';
-      deleteBtn.className = 'delete-btn';
-      deleteBtn.addEventListener('click', deleteTodo);
-      
-      // Add elements to list item
-      li.appendChild(textSpan);
-      li.appendChild(deleteBtn);
-      
-      // Add list item to todo list
-      todoList.appendChild(li);
-      
-      // Clear input
-      todoInput.value = '';
-      todoInput.focus();
-    }
-    
-    // Function to toggle completed status
-    function toggleComplete(e) {
-      const textSpan = e.target;
-      textSpan.parentElement.classList.toggle('completed');
-    }
-    
-    // Function to delete a todo
-    function deleteTodo(e) {
-      const li = e.target.parentElement;
-      todoList.removeChild(li);
-    }
-  </script>
-</body>
-</html>
-          `
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+  }
+}
+
+// Test the function
+fetchUserData(1)
+  .then(user => console.log('Success:', user))
+  .catch(error => console.error('Failed:', error));
+`
         },
-        xpReward: 25
+        xpReward: 30
+      }
+    ]
+  },
+  {
+    id: 'advanced-javascript',
+    title: 'Advanced JavaScript',
+    description: 'Master advanced JavaScript concepts and patterns',
+    icon: 'FileCode',
+    color: 'bg-yellow-600',
+    requiredTopics: ['javascript-basics'],
+    lessons: [
+      {
+        id: 'async-programming',
+        title: 'Asynchronous Programming',
+        description: 'Learn about Promises, async/await, and handling asynchronous operations',
+        content: `
+# Asynchronous Programming in JavaScript
+
+Understanding how to handle asynchronous operations is crucial for modern web development.
+
+## Promises
+
+\`\`\`javascript
+const fetchData = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = { id: 1, name: 'John' };
+      resolve(data);
+    }, 2000);
+  });
+};
+
+fetchData()
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+\`\`\`
+
+## Async/Await
+
+\`\`\`javascript
+async function getData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+\`\`\`
+`,
+        challenge: {
+          description: 'Create a function that fetches user data and handles errors appropriately',
+          startingCode: `
+async function fetchUserData(userId) {
+  // Implement the function
+}
+
+// Test the function
+fetchUserData(1);
+`,
+          solution: `
+async function fetchUserData(userId) {
+  try {
+    const response = await fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`);
+    
+    if (!response.ok) {
+      throw new Error('User not found');
+    }
+    
+    const userData = await response.json();
+    console.log('User data:', userData);
+    return userData;
+    
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+  }
+}
+
+// Test the function
+fetchUserData(1)
+  .then(user => console.log('Success:', user))
+  .catch(error => console.error('Failed:', error));
+`
+        },
+        xpReward: 30
       }
     ]
   }
@@ -1357,6 +1216,57 @@ export const projects: Project[] = [
       'Implement error handling for API requests'
     ],
     thumbnail: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    xpReward: 150
+  },
+  {
+    id: 'chat-app',
+    title: 'Real-time Chat Application',
+    description: 'Build a real-time chat application with multiple rooms and user presence',
+    difficulty: 'advanced',
+    topics: ['html-basics', 'css-basics', 'javascript-basics', 'advanced-javascript'],
+    requirements: [
+      'Implement user authentication',
+      'Create multiple chat rooms',
+      'Show online/offline status',
+      'Enable private messaging',
+      'Add emoji support',
+      'Implement message history'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/1310532/pexels-photo-1310532.jpeg',
+    xpReward: 200
+  },
+  {
+    id: 'kanban-board',
+    title: 'Kanban Task Board',
+    description: 'Create a drag-and-drop Kanban board for task management',
+    difficulty: 'intermediate',
+    topics: ['html-basics', 'css-basics', 'javascript-basics'],
+    requirements: [
+      'Implement drag and drop functionality',
+      'Create multiple columns (To Do, In Progress, Done)',
+      'Add new tasks with title and description',
+      'Enable task editing and deletion',
+      'Save tasks to localStorage',
+      'Add due dates and priority levels'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/3243/pen-calendar-to-do-checklist.jpg',
+    xpReward: 150
+  },
+  {
+    id: 'music-player',
+    title: 'Web Music Player',
+    description: 'Build a feature-rich music player with playlist support',
+    difficulty: 'intermediate',
+    topics: ['html-basics', 'css-basics', 'javascript-basics'],
+    requirements: [
+      'Play/pause, next/previous controls',
+      'Progress bar with seek functionality',
+      'Volume control',
+      'Playlist management',
+      'Shuffle and repeat modes',
+      'Display song metadata and album art'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg',
     xpReward: 150
   }
 ];
