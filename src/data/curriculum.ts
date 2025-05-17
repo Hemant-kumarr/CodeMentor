@@ -24,6 +24,34 @@ export interface Topic {
   requiredTopics?: string[];
 }
 
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  topics: string[];
+  requirements: string[];
+  thumbnail: string;
+  xpReward: number;
+}
+
+export interface Resource {
+  id: string;
+  title: string;
+  description: string;
+  type: 'cheatsheet' | 'reference' | 'tool' | 'article';
+  link: string;
+  icon: string;
+}
+
+export interface Badge {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+}
+
 export const topics: Topic[] = [
   {
     id: 'html-basics',
@@ -118,102 +146,59 @@ An HTML document has a required structure that includes the following declaratio
         xpReward: 10
       },
       {
-        id: 'html-elements',
-        title: 'HTML Elements',
-        description: 'Learn about different HTML elements and their purposes',
+        id: 'html-text-formatting',
+        title: 'Text Formatting and Typography',
+        description: 'Learn how to format text and create typographic hierarchy',
         content: `
-# HTML Elements
+# Text Formatting and Typography in HTML
 
-HTML elements are the building blocks of HTML pages. Elements are represented by tags, written using angle brackets.
+Learn how to format text and create clear visual hierarchies using HTML elements.
 
-## Common Elements
+## Headings
 
-### Headings
-HTML has six levels of headings, from \`<h1>\` (most important) to \`<h6>\` (least important).
-
-\`\`\`html
-<h1>This is heading 1</h1>
-<h2>This is heading 2</h2>
-<h3>This is heading 3</h3>
-\`\`\`
-
-### Paragraphs
-The \`<p>\` element defines a paragraph.
+HTML provides six levels of headings:
 
 \`\`\`html
-<p>This is a paragraph.</p>
+<h1>Main Heading</h1>
+<h2>Subheading</h2>
+<h3>Section Heading</h3>
+<h4>Subsection Heading</h4>
+<h5>Minor Heading</h5>
+<h6>Smallest Heading</h6>
 \`\`\`
 
-### Links
-The \`<a>\` element defines a hyperlink.
+## Text Formatting Elements
 
 \`\`\`html
-<a href="https://www.example.com">This is a link</a>
+<strong>Bold text</strong>
+<em>Italic text</em>
+<u>Underlined text</u>
+<mark>Highlighted text</mark>
+<small>Smaller text</small>
+<del>Deleted text</del>
+<ins>Inserted text</ins>
+<sub>Subscript</sub>
+<sup>Superscript</sup>
 \`\`\`
 
-### Images
-The \`<img>\` element is used to embed images.
+## Paragraphs and Line Breaks
 
 \`\`\`html
-<img src="image.jpg" alt="Description of image">
+<p>This is a paragraph of text.</p>
+<br> <!-- Line break -->
+<hr> <!-- Horizontal rule -->
 \`\`\`
-
-### Lists
-HTML supports ordered lists (\`<ol>\`) and unordered lists (\`<ul>\`).
-
-\`\`\`html
-<ul>
-  <li>Item 1</li>
-  <li>Item 2</li>
-</ul>
-
-<ol>
-  <li>First item</li>
-  <li>Second item</li>
-</ol>
-\`\`\`
-        `,
-        codeExample: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>HTML Elements Example</title>
-</head>
-<body>
-  <h1>Main Heading</h1>
-  <h2>Subheading</h2>
-  
-  <p>This is a paragraph with a <a href="https://example.com">link</a>.</p>
-  
-  <img src="https://via.placeholder.com/150" alt="Placeholder image">
-  
-  <h3>My Favorite Foods</h3>
-  <ul>
-    <li>Pizza</li>
-    <li>Tacos</li>
-    <li>Ice Cream</li>
-  </ul>
-  
-  <h3>Top 3 Movies</h3>
-  <ol>
-    <li>The Shawshank Redemption</li>
-    <li>The Godfather</li>
-    <li>The Dark Knight</li>
-  </ol>
-</body>
-</html>
         `,
         challenge: {
-          description: 'Create an HTML page about your favorite hobby with headings, paragraphs, links, and images',
+          description: 'Create a formatted article using various text elements',
           startingCode: `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Hobby</title>
+  <title>Article</title>
 </head>
 <body>
-  <!-- Create a page about your hobby here -->
-  
+  <!-- Create your article here -->
 </body>
 </html>
           `,
@@ -221,29 +206,20 @@ HTML supports ordered lists (\`<ol>\`) and unordered lists (\`<ul>\`).
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Hobby</title>
+  <title>Article</title>
 </head>
 <body>
-  <h1>Photography</h1>
-  <p>Photography is my favorite hobby. I love capturing moments and landscapes.</p>
-  
-  <h2>My Equipment</h2>
+  <h1>The Future of Web Development</h1>
+  <p><strong>Web development</strong> is constantly evolving. New technologies emerge every year, making the field <em>dynamic and exciting</em>.</p>
+  <h2>Key Trends</h2>
+  <p>Here are some important trends in <mark>2025</mark>:</p>
   <ul>
-    <li>Camera: Canon EOS R</li>
-    <li>Lenses: 24-70mm f/2.8, 50mm f/1.8</li>
-    <li>Tripod</li>
+    <li><strong>AI Integration</strong></li>
+    <li><em>Responsive Design</em></li>
+    <li><u>Progressive Web Apps</u></li>
   </ul>
-  
-  <h2>Favorite Subjects</h2>
-  <ol>
-    <li>Landscapes</li>
-    <li>Street photography</li>
-    <li>Portraits</li>
-  </ol>
-  
-  <p>Learn more about photography at <a href="https://www.nationalgeographic.com/photography/">National Geographic</a>.</p>
-  
-  <img src="https://via.placeholder.com/300x200" alt="Photography example">
+  <hr>
+  <small>Last updated: March 2025</small>
 </body>
 </html>
           `
@@ -251,113 +227,323 @@ HTML supports ordered lists (\`<ol>\`) and unordered lists (\`<ul>\`).
         xpReward: 15
       },
       {
-        id: 'html-forms',
-        title: 'HTML Forms & Validation',
-        description: 'Create interactive forms with built-in validation',
+        id: 'html-links-images',
+        title: 'Links and Images',
+        description: 'Learn how to add links and images to your web pages',
         content: `
-# HTML Forms & Validation
+# Links and Images in HTML
 
-Forms are essential for collecting user input on web pages. HTML5 provides built-in validation features to ensure data quality.
+Learn how to create hyperlinks and add images to your web pages.
 
-## Form Elements
+## Links
+
+The \`<a>\` element creates hyperlinks:
 
 \`\`\`html
-<form action="/submit" method="POST">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required minlength="3">
-  
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required>
-  
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required minlength="8">
-  
-  <button type="submit">Submit</button>
-</form>
+<!-- Basic link -->
+<a href="https://example.com">Visit Example</a>
+
+<!-- Link to another page -->
+<a href="about.html">About Us</a>
+
+<!-- Link that opens in new tab -->
+<a href="https://example.com" target="_blank">Open in New Tab</a>
+
+<!-- Link to email -->
+<a href="mailto:contact@example.com">Email Us</a>
+
+<!-- Link to phone number -->
+<a href="tel:+1234567890">Call Us</a>
 \`\`\`
 
-## Input Types
+## Images
 
-- text: Basic text input
-- email: Email validation
-- password: Password field
-- number: Numeric input
-- tel: Phone numbers
-- date: Date picker
-- color: Color picker
-- file: File upload
-- checkbox: Multiple selections
-- radio: Single selection
-`,
+The \`<img>\` element embeds images:
+
+\`\`\`html
+<!-- Basic image -->
+<img src="image.jpg" alt="Description">
+
+<!-- Image with width and height -->
+<img src="image.jpg" alt="Description" width="300" height="200">
+
+<!-- Responsive image -->
+<img src="image.jpg" alt="Description" style="max-width: 100%; height: auto;">
+\`\`\`
+
+## Combining Links and Images
+
+\`\`\`html
+<a href="https://example.com">
+  <img src="logo.png" alt="Company Logo">
+</a>
+\`\`\`
+        `,
         challenge: {
-          description: 'Create a registration form with proper validation',
+          description: 'Create a photo gallery with linked images',
           startingCode: `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registration Form</title>
+  <title>Photo Gallery</title>
 </head>
 <body>
-  <!-- Create your form here -->
-  
+  <!-- Create your gallery here -->
 </body>
 </html>
-`,
+          `,
           solution: `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Registration Form</title>
-  <style>
-    form { max-width: 400px; margin: 20px auto; }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; margin-bottom: 5px; }
-    input { width: 100%; padding: 8px; }
-    button { padding: 10px 20px; background: #4CAF50; color: white; border: none; }
-  </style>
+  <title>Photo Gallery</title>
 </head>
 <body>
-  <form id="registrationForm" onsubmit="return validateForm()">
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required minlength="3">
-    </div>
-    
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required minlength="8">
-    </div>
-    
-    <div class="form-group">
-      <label for="confirm-password">Confirm Password:</label>
-      <input type="password" id="confirm-password" name="confirm-password" required>
-    </div>
-    
-    <button type="submit">Register</button>
-  </form>
-
-  <script>
-    function validateForm() {
-      const password = document.getElementById('password').value;
-      const confirmPassword = document.getElementById('confirm-password').value;
-      
-      if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return false;
-      }
-      return true;
-    }
-  </script>
+  <h1>My Photo Gallery</h1>
+  <div class="gallery">
+    <a href="https://example.com/photo1-large.jpg" target="_blank">
+      <img src="https://via.placeholder.com/300x200" alt="Nature Photo 1">
+    </a>
+    <a href="https://example.com/photo2-large.jpg" target="_blank">
+      <img src="https://via.placeholder.com/300x200" alt="Nature Photo 2">
+    </a>
+    <a href="https://example.com/photo3-large.jpg" target="_blank">
+      <img src="https://via.placeholder.com/300x200" alt="Nature Photo 3">
+    </a>
+  </div>
+  <p>Click on any image to view full size</p>
 </body>
 </html>
-`
+          `
         },
         xpReward: 20
+      },
+      {
+        id: 'html-lists',
+        title: 'Lists and Navigation',
+        description: 'Create different types of lists and navigation menus',
+        content: `
+# Lists and Navigation in HTML
+
+Learn how to create various types of lists and navigation structures.
+
+## Unordered Lists
+
+\`\`\`html
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ul>
+\`\`\`
+
+## Ordered Lists
+
+\`\`\`html
+<ol>
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ol>
+\`\`\`
+
+## Description Lists
+
+\`\`\`html
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets</dd>
+</dl>
+\`\`\`
+
+## Navigation Menus
+
+\`\`\`html
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+\`\`\`
+        `,
+        challenge: {
+          description: 'Create a website navigation menu with nested lists',
+          startingCode: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Navigation Menu</title>
+</head>
+<body>
+  <!-- Create your navigation here -->
+</body>
+</html>
+          `,
+          solution: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Navigation Menu</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li>
+        <a href="/products">Products</a>
+        <ul>
+          <li><a href="/products/new">New Arrivals</a></li>
+          <li><a href="/products/featured">Featured</a></li>
+          <li><a href="/products/sale">Sale</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="/services">Services</a>
+        <ul>
+          <li><a href="/services/consulting">Consulting</a></li>
+          <li><a href="/services/training">Training</a></li>
+          <li><a href="/services/support">Support</a></li>
+        </ul>
+      </li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+</body>
+</html>
+          `
+        },
+        xpReward: 20
+      },
+      {
+        id: 'html-tables',
+        title: 'Tables and Data',
+        description: 'Learn to create and structure tables for data presentation',
+        content: `
+# Tables in HTML
+
+Learn how to create and structure tables for presenting data.
+
+## Basic Table Structure
+
+\`\`\`html
+<table>
+  <thead>
+    <tr>
+      <th>Header 1</th>
+      <th>Header 2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Data 1</td>
+      <td>Data 2</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td>Footer 1</td>
+      <td>Footer 2</td>
+    </tr>
+  </tfoot>
+</table>
+\`\`\`
+
+## Table Elements
+
+- \`<table>\`: Defines a table
+- \`<thead>\`: Groups header content
+- \`<tbody>\`: Groups body content
+- \`<tfoot>\`: Groups footer content
+- \`<tr>\`: Defines a row
+- \`<th>\`: Defines a header cell
+- \`<td>\`: Defines a data cell
+
+## Advanced Table Features
+
+\`\`\`html
+<table>
+  <caption>Monthly Budget</caption>
+  <colgroup>
+    <col style="background-color: #f0f0f0">
+    <col span="2">
+  </colgroup>
+  <tr>
+    <th rowspan="2">Category</th>
+    <th colspan="2">Amount</th>
+  </tr>
+</table>
+\`\`\`
+        `,
+        challenge: {
+          description: 'Create a complex table with merged cells and styling',
+          startingCode: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Table</title>
+</head>
+<body>
+  <!-- Create your table here -->
+</body>
+</html>
+          `,
+          solution: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Table</title>
+</head>
+<body>
+  <table border="1">
+    <caption>Quarterly Sales Report</caption>
+    <thead>
+      <tr>
+        <th rowspan="2">Product</th>
+        <th colspan="4">Quarterly Sales</th>
+      </tr>
+      <tr>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+        <th>Q4</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Product A</td>
+        <td>$1,000</td>
+        <td>$1,200</td>
+        <td>$900</td>
+        <td>$1,500</td>
+      </tr>
+      <tr>
+        <td>Product B</td>
+        <td>$800</td>
+        <td>$950</td>
+        <td>$1,100</td>
+        <td>$1,300</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Total</td>
+        <td>$1,800</td>
+        <td>$2,150</td>
+        <td>$2,000</td>
+        <td>$2,800</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+</html>
+          `
+        },
+        xpReward: 25
       }
     ]
   },
@@ -376,133 +562,70 @@ Forms are essential for collecting user input on web pages. HTML5 provides built
         content: `
 # Introduction to CSS
 
-CSS (Cascading Style Sheets) is used to style and layout web pages — for example, to alter the font, color, size, and spacing of your content, split it into multiple columns, or add animations and other decorative features.
-
-## Adding CSS to HTML
-
-There are three ways to add CSS to HTML:
-
-1. **Inline CSS** - using the \`style\` attribute in HTML elements
-2. **Internal CSS** - using the \`<style>\` element in the \`<head>\` section
-3. **External CSS** - using an external CSS file
-
-### Inline CSS
-
-\`\`\`html
-<h1 style="color: blue; text-align: center;">This is a heading</h1>
-\`\`\`
-
-### Internal CSS
-
-\`\`\`html
-<head>
-  <style>
-    body {
-      background-color: lightblue;
-    }
-    h1 {
-      color: navy;
-      margin-left: 20px;
-    }
-  </style>
-</head>
-\`\`\`
-
-### External CSS (most common)
-
-\`\`\`html
-<head>
-  <link rel="stylesheet" href="styles.css">
-</head>
-\`\`\`
+CSS (Cascading Style Sheets) is used to style and layout web pages. Learn the basics of CSS syntax and selectors.
 
 ## CSS Syntax
-
-CSS consists of a selector and a declaration block:
 
 \`\`\`css
 selector {
   property: value;
-  property: value;
 }
 \`\`\`
 
-For example:
+## Ways to Add CSS
+
+1. Inline CSS:
+\`\`\`html
+<div style="color: blue;">Blue text</div>
+\`\`\`
+
+2. Internal CSS:
+\`\`\`html
+<style>
+  div { color: blue; }
+</style>
+\`\`\`
+
+3. External CSS:
+\`\`\`html
+<link rel="stylesheet" href="styles.css">
+\`\`\`
+
+## Basic Selectors
 
 \`\`\`css
-h1 {
-  color: blue;
-  font-size: 24px;
-}
+/* Element selector */
+p { color: red; }
+
+/* Class selector */
+.highlight { background-color: yellow; }
+
+/* ID selector */
+#header { font-size: 24px; }
+
+/* Descendant selector */
+div p { margin: 10px; }
+
+/* Child selector */
+div > p { padding: 5px; }
 \`\`\`
         `,
-        codeExample: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>CSS Introduction</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f0f0f0;
-    }
-    
-    h1 {
-      color: #0066cc;
-      text-align: center;
-    }
-    
-    p {
-      color: #333;
-      line-height: 1.6;
-    }
-    
-    .highlight {
-      background-color: yellow;
-      padding: 5px;
-    }
-    
-    #special {
-      border: 2px solid #0066cc;
-      padding: 10px;
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h1>Welcome to CSS</h1>
-  <p>This is a paragraph with default styling.</p>
-  <p>This paragraph has a <span class="highlight">highlighted</span> word.</p>
-  <div id="special">
-    <p>This is inside a special div with a border.</p>
-  </div>
-</body>
-</html>
-        `,
         challenge: {
-          description: 'Style an HTML page with different CSS properties',
+          description: 'Style a simple webpage using different CSS selectors',
           startingCode: `
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Styled Page</title>
+  <title>CSS Practice</title>
   <style>
     /* Add your CSS here */
-    
   </style>
 </head>
 <body>
-  <h1>My Website</h1>
-  <p>Welcome to my website about web development.</p>
-  <ul class="topics">
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>JavaScript</li>
-  </ul>
-  <div id="footer">
-    <p>Created by me - 2025</p>
+  <div id="container">
+    <h1>Welcome</h1>
+    <p class="highlight">This is a highlighted paragraph.</p>
+    <p>This is a regular paragraph.</p>
   </div>
 </body>
 </html>
@@ -511,64 +634,348 @@ h1 {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Styled Page</title>
+  <title>CSS Practice</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
-      margin: 0;
+      margin: 20px;
+    }
+
+    #container {
+      max-width: 800px;
+      margin: 0 auto;
       padding: 20px;
-      background-color: #f5f5f5;
+      border: 1px solid #ccc;
     }
-    
+
     h1 {
-      color: #2c3e50;
-      text-align: center;
-      border-bottom: 2px solid #3498db;
-      padding-bottom: 10px;
-    }
-    
-    p {
       color: #333;
-    }
-    
-    .topics {
-      background-color: #ecf0f1;
-      padding: 15px;
-      border-radius: 5px;
-    }
-    
-    .topics li {
-      color: #2980b9;
-      margin-bottom: 5px;
-    }
-    
-    #footer {
-      margin-top: 20px;
       text-align: center;
-      font-size: 14px;
-      color: #7f8c8d;
-      border-top: 1px solid #bdc3c7;
-      padding-top: 10px;
+    }
+
+    .highlight {
+      background-color: #fff3cd;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 15px;
     }
   </style>
 </head>
 <body>
-  <h1>My Website</h1>
-  <p>Welcome to my website about web development.</p>
-  <ul class="topics">
-    <li>HTML</li>
-    <li>CSS</li>
-    <li>JavaScript</li>
-  </ul>
-  <div id="footer">
-    <p>Created by me - 2025</p>
+  <div id="container">
+    <h1>Welcome</h1>
+    <p class="highlight">This is a highlighted paragraph.</p>
+    <p>This is a regular paragraph.</p>
   </div>
 </body>
 </html>
           `
         },
         xpReward: 15
+      },
+      {
+        id: 'css-colors-backgrounds',
+        title: 'Colors and Backgrounds',
+        description: 'Learn about color values and background properties',
+        content: `
+# Colors and Backgrounds in CSS
+
+Learn how to work with colors and backgrounds in CSS.
+
+## Color Values
+
+\`\`\`css
+/* Color keywords */
+color: red;
+color: blue;
+
+/* Hexadecimal */
+color: #ff0000;
+color: #0000ff;
+
+/* RGB */
+color: rgb(255, 0, 0);
+color: rgba(0, 0, 255, 0.5);
+
+/* HSL */
+color: hsl(0, 100%, 50%);
+color: hsla(240, 100%, 50%, 0.5);
+\`\`\`
+
+## Background Properties
+
+\`\`\`css
+/* Background color */
+background-color: #f0f0f0;
+
+/* Background image */
+background-image: url('image.jpg');
+
+/* Background position */
+background-position: center center;
+
+/* Background size */
+background-size: cover;
+background-size: contain;
+
+/* Background repeat */
+background-repeat: no-repeat;
+
+/* Background attachment */
+background-attachment: fixed;
+
+/* Shorthand */
+background: #f0f0f0 url('image.jpg') center/cover no-repeat fixed;
+\`\`\`
+        `,
+        challenge: {
+          description: 'Create a webpage with various background effects',
+          startingCode: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backgrounds</title>
+  <style>
+    /* Add your CSS here */
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Welcome</h1>
+  </div>
+  <div class="content">
+    <p>Content goes here</p>
+  </div>
+</body>
+</html>
+          `,
+          solution: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backgrounds</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .hero {
+      height: 400px;
+      background-image: url('https://images.pexels.com/photos/1261728/pexels-photo-1261728.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero h1 {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      font-size: 48px;
+    }
+
+    .content {
+      padding: 40px;
+      background-color: #f8f9fa;
+      background-image: linear-gradient(45deg, #f8f9fa 25%, transparent 25%),
+                        linear-gradient(-45deg, #f8f9fa 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, #f8f9fa 75%),
+                        linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+      background-size: 20px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Welcome</h1>
+  </div>
+  <div class="content">
+    <p>Content goes here</p>
+  </div>
+</body>
+</html>
+          `
+        },
+        xpReward: 20
+      },
+      {
+        id: 'css-box-model',
+        title: 'Box Model and Layout',
+        description: 'Understanding the CSS box model and layout properties',
+        content: `
+# CSS Box Model
+
+The CSS box model is fundamental to layout and spacing in CSS.
+
+## Box Model Components
+
+\`\`\`css
+/* Content */
+width: 200px;
+height: 100px;
+
+/* Padding */
+padding: 20px;
+padding-top: 10px;
+padding-right: 20px;
+padding-bottom: 10px;
+padding-left: 20px;
+
+/* Border */
+border: 1px solid black;
+border-width: 1px;
+border-style: solid;
+border-color: black;
+
+/* Margin */
+margin: 20px;
+margin-top: 10px;
+margin-right: 20px;
+margin-bottom: 10px;
+margin-left: 20px;
+
+/* Box Sizing */
+box-sizing: border-box;
+box-sizing: content-box;
+\`\`\`
+
+## Display Properties
+
+\`\`\`css
+/* Common display values */
+display: block;
+display: inline;
+display: inline-block;
+display: flex;
+display: grid;
+display: none;
+\`\`\`
+
+## Position Properties
+
+\`\`\`css
+position: static;
+position: relative;
+position: absolute;
+position: fixed;
+position: sticky;
+
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 1;
+\`\`\`
+        `,
+        challenge: {
+          description: 'Create a layout using the box model and positioning',
+          startingCode: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Layout Practice</title>
+  <style>
+    /* Add your CSS here */
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Website</h1>
+  </header>
+  <main>
+    <aside>Sidebar</aside>
+    <article>Main Content</article>
+  </main>
+  <footer>Footer</footer>
+</body>
+</html>
+          `,
+          solution: `
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Layout Practice</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    main {
+      display: flex;
+      min-height: calc(100vh - 120px);
+    }
+
+    aside {
+      width: 200px;
+      background-color: #f4f4f4;
+      padding: 1rem;
+      border-right: 1px solid #ddd;
+    }
+
+    article {
+      flex: 1;
+      padding: 1rem;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      height: 60px;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
+
+      aside {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Website</h1>
+  </header>
+  <main>
+    <aside>Sidebar</aside>
+    <article>Main Content</article>
+  </main>
+  <footer>Footer</footer>
+</body>
+</html>
+          `
+        },
+        xpReward: 25
       }
     ]
   },
@@ -587,571 +994,382 @@ h1 {
         content: `
 # Introduction to JavaScript
 
-JavaScript is a programming language that enables interactive web pages. It is an essential part of web applications, and it's supported by all modern browsers without plugins.
+JavaScript is a programming language that enables interactive web pages. Learn the fundamentals of JavaScript programming.
 
-## Adding JavaScript to HTML
-
-There are three ways to add JavaScript to HTML:
-
-1. **Inline JavaScript** - using the \`onclick\` attribute (and similar) in HTML elements
-2. **Internal JavaScript** - using the \`<script>\` element in the HTML document
-3. **External JavaScript** - using an external JavaScript file
-
-### Inline JavaScript
-
-\`\`\`html
-<button onclick="alert('Hello, World!')">Click Me</button>
-\`\`\`
-
-### Internal JavaScript
-
-\`\`\`html
-<head>
-  <script>
-    function sayHello() {
-      alert('Hello, World!');
-    }
-  </script>
-</head>
-<body>
-  <button onclick="sayHello()">Click Me</button>
-</body>
-\`\`\`
-
-### External JavaScript (most common)
-
-\`\`\`html
-<head>
-  <script src="script.js"></script>
-</head>
-\`\`\`
-
-## JavaScript Basics
-
-### Variables and Data Types
+## Variables and Data Types
 
 \`\`\`javascript
-// Variable declarations
-let message = 'Hello'; // String
-let number = 42; // Number
-let isTrue = true; // Boolean
-let nothing = null; // Null
-let undefined; // Undefined
-let person = { name: 'John', age: 30 }; // Object
-let numbers = [1, 2, 3, 4, 5]; // Array
+// Variables
+let name = 'John';
+const age = 30;
+var oldStyle = 'not recommended';
+
+// Data Types
+let string = 'Hello';
+let number = 42;
+let boolean = true;
+let array = [1, 2, 3];
+let object = { key: 'value' };
+let nullValue = null;
+let undefinedValue;
+
+// Template Literals
+let greeting = \`Hello, \${name}!\`;
 \`\`\`
 
-### Functions
+## Operators
 
 \`\`\`javascript
-// Function declaration
-function greet(name) {
-  return 'Hello, ' + name + '!';
-}
+// Arithmetic
+let sum = 5 + 3;
+let difference = 10 - 5;
+let product = 4 * 2;
+let quotient = 15 / 3;
+let remainder = 10 % 3;
 
-// Function expression
-const sayGoodbye = function(name) {
-  return 'Goodbye, ' + name + '!';
-};
+// Comparison
+let equals = 5 === 5;
+let notEquals = 5 !== 3;
+let greaterThan = 10 > 5;
+let lessThan = 5 < 10;
 
-// Arrow function (ES6)
-const add = (a, b) => a + b;
+// Logical
+let and = true && false;
+let or = true || false;
+let not = !true;
 \`\`\`
 
-### Conditionals
+## Control Flow
 
 \`\`\`javascript
-let age = 20;
-
-if (age >= 18) {
-  console.log('You are an adult');
+// If Statement
+if (condition) {
+  // code
+} else if (otherCondition) {
+  // code
 } else {
-  console.log('You are a minor');
+  // code
 }
 
-// Ternary operator
-let message = age >= 18 ? 'You are an adult' : 'You are a minor';
-\`\`\`
+// Switch Statement
+switch (value) {
+  case 1:
+    // code
+    break;
+  case 2:
+    // code
+    break;
+  default:
+    // code
+}
 
-### Loops
-
-\`\`\`javascript
-// For loop
+// Loops
 for (let i = 0; i < 5; i++) {
-  console.log(i);
+  // code
 }
 
-// While loop
-let i = 0;
-while (i < 5) {
-  console.log(i);
-  i++;
+while (condition) {
+  // code
 }
 
-// For...of loop (arrays)
-const fruits = ['apple', 'banana', 'orange'];
-for (const fruit of fruits) {
-  console.log(fruit);
-}
-
-// For...in loop (objects)
-const person = { name: 'John', age: 30, job: 'developer' };
-for (const key in person) {
-  console.log(key + ': ' + person[key]);
-}
+do {
+  // code
+} while (condition);
 \`\`\`
-        `,
-        codeExample: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>JavaScript Introduction</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-    
-    button {
-      padding: 10px 15px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin: 5px;
-    }
-    
-    #output {
-      margin-top: 20px;
-      padding: 15px;
-      background-color: #f1f1f1;
-      border-radius: 4px;
-      min-height: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h1>JavaScript Demo</h1>
-  
-  <button onclick="showMessage()">Show Message</button>
-  <button onclick="changeColor()">Change Color</button>
-  <button onclick="countToTen()">Count to 10</button>
-  
-  <div id="output"></div>
-  
-  <script>
-    function showMessage() {
-      document.getElementById('output').textContent = 'Hello, JavaScript!';
-    }
-    
-    function changeColor() {
-      const colors = ['#ff6b6b', '#48dbfb', '#1dd1a1', '#feca57', '#ee5253'];
-      const randomColor = colors[Math.floor(Math.random() * colors.length)];
-      document.getElementById('output').style.backgroundColor = randomColor;
-    }
-    
-    function countToTen() {
-      let result = '';
-      for (let i = 1; i <= 10; i++) {
-        result += i + ' ';
-      }
-      document.getElementById('output').textContent = result;
-    }
-  </script>
-</body>
-</html>
         `,
         challenge: {
-          description: 'Create a simple calculator that can add, subtract, multiply, and divide two numbers',
+          description: 'Create a simple calculator program',
           startingCode: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Simple Calculator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-    
-    input, button {
-      padding: 8px;
-      margin: 5px;
-    }
-    
-    #result {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <h1>Simple Calculator</h1>
-  
-  <div>
-    <input type="number" id="num1" placeholder="Enter first number">
-    <input type="number" id="num2" placeholder="Enter second number">
-  </div>
-  
-  <div>
-    <button onclick="calculate('add')">Add</button>
-    <button onclick="calculate('subtract')">Subtract</button>
-    <button onclick="calculate('multiply')">Multiply</button>
-    <button onclick="calculate('divide')">Divide</button>
-  </div>
-  
-  <div id="result">Result will appear here</div>
-  
-  <script>
-    function calculate(operation) {
-      // Write your code here
-      
-    }
-  </script>
-</body>
-</html>
+function calculate(num1, num2, operation) {
+  // Implement the calculator
+}
+
+// Test cases
+console.log(calculate(5, 3, 'add'));
+console.log(calculate(10, 2, 'subtract'));
+console.log(calculate(4, 5, 'multiply'));
+console.log(calculate(15, 3, 'divide'));
           `,
           solution: `
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Simple Calculator</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-    
-    input, button {
-      padding: 8px;
-      margin: 5px;
-    }
-    
-    #result {
-      margin-top: 20px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-  <h1>Simple Calculator</h1>
-  
-  <div>
-    <input type="number" id="num1" placeholder="Enter first number">
-    <input type="number" id="num2" placeholder="Enter second number">
-  </div>
-  
-  <div>
-    <button onclick="calculate('add')">Add</button>
-    <button onclick="calculate('subtract')">Subtract</button>
-    <button onclick="calculate('multiply')">Multiply</button>
-    <button onclick="calculate('divide')">Divide</button>
-  </div>
-  
-  <div id="result">Result will appear here</div>
-  
-  <script>
-    function calculate(operation) {
-      // Get the input values
-      const num1 = parseFloat(document.getElementById('num1').value);
-      const num2 = parseFloat(document.getElementById('num2').value);
-      let result;
-      
-      // Check if the inputs are valid numbers
-      if (isNaN(num1) || isNaN(num2)) {
-        document.getElementById('result').textContent = 'Please enter valid numbers';
-        return;
+function calculate(num1, num2, operation) {
+  switch (operation) {
+    case 'add':
+      return num1 + num2;
+    case 'subtract':
+      return num1 - num2;
+    case 'multiply':
+      return num1 * num2;
+    case 'divide':
+      if (num2 === 0) {
+        return 'Cannot divide by zero';
       }
-      
-      // Perform the calculation based on the operation
-      switch(operation) {
-        case 'add':
-          result = num1 + num2;
-          break;
-        case 'subtract':
-          result = num1 - num2;
-          break;
-        case 'multiply':
-          result = num1 * num2;
-          break;
-        case 'divide':
-          if (num2 === 0) {
-            document.getElementById('result').textContent = 'Cannot divide by zero';
-            return;
-          }
-          result = num1 / num2;
-          break;
-      }
-      
-      // Display the result
-      document.getElementById('result').textContent = result;
-    }
-  </script>
-</body>
-</html>
+      return num1 / num2;
+    default:
+      return 'Invalid operation';
+  }
+}
+
+// Test cases
+console.log(calculate(5, 3, 'add')); // 8
+console.log(calculate(10, 2, 'subtract')); // 8
+console.log(calculate(4, 5, 'multiply')); // 20
+console.log(calculate(15, 3, 'divide')); // 5
           `
         },
         xpReward: 20
-      }
-    ]
-  },
-  {
-    id: 'dom-manipulation',
-    title: 'DOM Manipulation',
-    description: 'Learn to dynamically modify web pages',
-    icon: 'layout',
-    color: 'bg-purple-500',
-    requiredTopics: ['javascript-basics'],
-    lessons: [
+      },
       {
-        id: 'dom-intro',
-        title: 'Introduction to the DOM',
-        description: 'Learn how to manipulate web page elements with JavaScript',
+        id: 'js-functions',
+        title: 'Functions and Scope',
+        description: 'Learn about JavaScript functions and variable scope',
         content: `
-# Introduction to the DOM
+# Functions and Scope in JavaScript
 
-The Document Object Model (DOM) is a programming interface for web documents. It represents the page so that programs can change the document structure, style, and content. The DOM represents the document as nodes and objects; that way, programming languages can interact with the page.
+Learn how to create and use functions, and understand variable scope.
 
-## What is the DOM?
-
-The DOM is a tree-like representation of the web page that gets loaded into the browser. It represents the page so that programs can change the document structure, style, and content.
-
-## Accessing DOM Elements
-
-JavaScript provides several methods to access DOM elements:
+## Function Declaration
 
 \`\`\`javascript
-// By ID
-const element = document.getElementById('myId');
-
-// By class name
-const elements = document.getElementsByClassName('myClass');
-
-// By tag name
-const paragraphs = document.getElementsByTagName('p');
-
-// Using CSS selectors (modern approach)
-const element = document.querySelector('#myId'); // Select the first matching element
-const elements = document.querySelectorAll('.myClass'); // Select all matching elements
-\`\`\`
-
-## Modifying DOM Elements
-
-Once you have selected a DOM element, you can modify its properties:
-
-\`\`\`javascript
-// Changing text content
-element.textContent = 'New text';
-
-// Changing HTML content
-element.innerHTML = '<strong>New HTML</strong>';
-
-// Changing attributes
-element.setAttribute('src', 'newimage.jpg');
-element.id = 'newId';
-
-// Changing styles
-element.style.color = 'red';
-element.style.backgroundColor = 'yellow';
-
-// Adding classes
-element.classList.add('newClass');
-element.classList.remove('oldClass');
-element.classList.toggle('someClass');
-\`\`\`
-
-## Creating and Adding Elements
-
-\`\`\`javascript
-// Create a new element
-const newElement = document.createElement('div');
-
-// Add content to it
-newElement.textContent = 'This is a new element';
-
-// Add it to the document
-document.body.appendChild(newElement);
-
-// Insert before another element
-const referenceElement = document.getElementById('someId');
-document.body.insertBefore(newElement, referenceElement);
-\`\`\`
-
-## Removing Elements
-
-\`\`\`javascript
-// Remove an element
-element.remove();
-
-// Remove a child element
-const parent = document.getElementById('parent');
-const child = document.getElementById('child');
-parent.removeChild(child);
-\`\`\`
-
-## Event Handling
-
-\`\`\`javascript
-// Add event listener
-element.addEventListener('click', function(event) {
-  console.log('Element clicked!');
-});
-
-// Remove event listener
-function handleClick(event) {
-  console.log('Element clicked!');
+// Function Declaration
+function greet(name) {
+  return \`Hello, \${name}!\`;
 }
-element.addEventListener('click', handleClick);
-element.removeEventListener('click', handleClick);
+
+// Function Expression
+const greet = function(name) {
+  return \`Hello, \${name}!\`;
+};
+
+// Arrow Function
+const greet = (name) => \`Hello, \${name}!\`;
+
+// Default Parameters
+function greet(name = 'Guest') {
+  return \`Hello, \${name}!\`;
+}
+
+// Rest Parameters
+function sum(...numbers) {
+  return numbers.reduce((total, num) => total + num, 0);
+}
+\`\`\`
+
+## Scope
+
+\`\`\`javascript
+// Global Scope
+let globalVar = 'I am global';
+
+function example() {
+  // Function Scope
+  let functionVar = 'I am function-scoped';
+  
+  if (true) {
+    // Block Scope
+    let blockVar = 'I am block-scoped';
+    const alsoBlockScoped = 'Me too';
+    var notBlockScoped = 'I leak out';
+  }
+}
+
+// Closure
+function createCounter() {
+  let count = 0;
+  return function() {
+    return ++count;
+  };
+}
 \`\`\`
         `,
         challenge: {
-          description: 'Create a function that fetches user data and handles errors appropriately',
+          description: 'Create a function factory with closures',
           startingCode: `
-async function fetchUserData(userId) {
-  // Implement the function
+function createGame(initialScore) {
+  
+  // Implement the game factory
 }
 
-// Test the function
-fetchUserData(1);
-`,
+// Test the implementation
+const game = createGame(0);
+console.log(game.getScore()); // Should print 0
+game.addPoints(5);
+console.log(game.getScore()); // Should print 5
+game.subtractPoints(2);
+console.log(game.getScore()); // Should print 3
+          `,
           solution: `
-async function fetchUserData(userId) {
-  try {
-    const response = await fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`);
-    
-    if (!response.ok) {
-      throw new Error('User not found');
+function createGame(initialScore) {
+  let score = initialScore;
+  
+  return {
+    getScore: function() {
+      return score;
+    },
+    addPoints: function(points) {
+      score += points;
+      return score;
+    },
+    subtractPoints: function(points) {
+      score -= points;
+      return score;
+    },
+    resetScore: function() {
+      score = initialScore;
+      return score;
     }
-    
-    const userData = await response.json();
-    console.log('User data:', userData);
-    return userData;
-    
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    throw error;
-  }
+  };
 }
 
-// Test the function
-fetchUserData(1)
-  .then(user => console.log('Success:', user))
-  .catch(error => console.error('Failed:', error));
-`
+// Test the implementation
+const game = createGame(0);
+console.log(game.getScore()); // 0
+game.addPoints(5);
+console.log(game.getScore()); // 5
+game.subtractPoints(2);
+console.log(game.getScore()); // 3
+game.resetScore();
+console.log(game.getScore()); // 0
+          `
         },
-        xpReward: 30
-      }
-    ]
-  },
-  {
-    id: 'advanced-javascript',
-    title: 'Advanced JavaScript',
-    description: 'Master advanced JavaScript concepts and patterns',
-    icon: 'FileCode',
-    color: 'bg-yellow-600',
-    requiredTopics: ['javascript-basics'],
-    lessons: [
+        xpReward: 25
+      },
       {
-        id: 'async-programming',
-        title: 'Asynchronous Programming',
-        description: 'Learn about Promises, async/await, and handling asynchronous operations',
+        id: 'js-arrays',
+        title: 'Arrays and Array Methods',
+        description: 'Work with arrays and learn powerful array methods',
         content: `
-# Asynchronous Programming in JavaScript
+# Arrays in JavaScript
 
-Understanding how to handle asynchronous operations is crucial for modern web development.
+Learn how to work with arrays and use array methods effectively.
 
-## Promises
-
-\`\`\`javascript
-const fetchData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      const data = { id: 1, name: 'John' };
-      resolve(data);
-    }, 2000);
-  });
-};
-
-fetchData()
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-\`\`\`
-
-## Async/Await
+## Array Basics
 
 \`\`\`javascript
-async function getData() {
-  try {
-    const response = await fetch('https://api.example.com/data');
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
+// Creating Arrays
+let fruits = ['apple', 'banana', 'orange'];
+let numbers = new Array(1, 2, 3);
+let mixed = [1, 'two', { three: 3 }, [4]];
+
+// Accessing Elements
+let firstFruit = fruits[0];
+let lastFruit = fruits[fruits.length - 1];
+
+// Modifying Arrays
+fruits[1] = 'grape';
+fruits.push('mango');
+fruits.pop();
+fruits.unshift('pear');
+fruits.shift();
 \`\`\`
-`,
+
+## Array Methods
+
+\`\`\`javascript
+// forEach
+fruits.forEach(fruit => console.log(fruit));
+
+// map
+let doubled = numbers.map(num => num * 2);
+
+// filter
+let evenNumbers = numbers.filter(num => num % 2 === 0);
+
+// reduce
+let sum = numbers.reduce((total, num) => total + num, 0);
+
+// find
+let found = numbers.find(num => num > 2);
+
+// some
+let hasEven = numbers.some(num => num % 2 === 0);
+
+// every
+let allPositive = numbers.every(num => num > 0);
+
+// sort
+fruits.sort();
+numbers.sort((a, b) => a - b);
+
+// slice and splice
+let sliced = fruits.slice(1, 3);
+fruits.splice(1, 1, 'new item');
+\`\`\`
+        `,
         challenge: {
-          description: 'Create a function that fetches user data and handles errors appropriately',
+          description: 'Create a todo list manager using array methods',
           startingCode: `
-async function fetchUserData(userId) {
-  // Implement the function
+class TodoList {
+  constructor() {
+    this.todos = [];
+  }
+  
+  // Implement these methods
+  addTodo(text) {}
+  removeTodo(id) {}
+  toggleTodo(id) {}
+  filterTodos(status) {}
 }
 
-// Test the function
-fetchUserData(1);
-`,
+// Test the implementation
+const todoList = new TodoList();
+          `,
           solution: `
-async function fetchUserData(userId) {
-  try {
-    const response = await fetch(\`https://jsonplaceholder.typicode.com/users/\${userId}\`);
-    
-    if (!response.ok) {
-      throw new Error('User not found');
+class TodoList {
+  constructor() {
+    this.todos = [];
+    this.currentId = 1;
+  }
+  
+  addTodo(text) {
+    const todo = {
+      id: this.currentId++,
+      text,
+      completed: false,
+      createdAt: new Date()
+    };
+    this.todos.push(todo);
+    return todo;
+  }
+  
+  removeTodo(id) {
+    const index = this.todos.findIndex(todo => todo.id === id);
+    if (index !== -1) {
+      return this.todos.splice(index, 1)[0];
     }
-    
-    const userData = await response.json();
-    console.log('User data:', userData);
-    return userData;
-    
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    throw error;
+    return null;
+  }
+  
+  toggleTodo(id) {
+    const todo = this.todos.find(todo => todo.id === id);
+    if (todo) {
+      todo.completed = !todo.completed;
+      return todo;
+    }
+    return null;
+  }
+  
+  filterTodos(status) {
+    if (status === 'all') return this.todos;
+    return this.todos.filter(todo => 
+      status === 'completed' ? todo.completed : !todo.completed
+    );
   }
 }
 
-// Test the function
-fetchUserData(1)
-  .then(user => console.log('Success:', user))
-  .catch(error => console.error('Failed:', error));
-`
+// Test the implementation
+const todoList = new TodoList();
+todoList.addTodo('Learn JavaScript');
+todoList.addTodo('Build a project');
+todoList.toggleTodo(1);
+console.log(todoList.filterTodos('completed'));
+console.log(todoList.filterTodos('active'));
+          `
         },
         xpReward: 30
       }
     ]
   }
 ];
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  topics: string[];
-  requirements: string[];
-  thumbnail: string;
-  xpReward: number;
-}
 
 export const projects: Project[] = [
   {
@@ -1271,15 +1489,6 @@ export const projects: Project[] = [
   }
 ];
 
-export interface Resource {
-  id: string;
-  title: string;
-  description: string;
-  type: 'cheatsheet' | 'reference' | 'tool' | 'article';
-  link: string;
-  icon: string;
-}
-
 export const resources: Resource[] = [
   {
     id: 'html-cheatsheet',
@@ -1346,14 +1555,6 @@ export const resources: Resource[] = [
     icon: 'layout'
   }
 ];
-
-export interface Badge {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  color: string;
-}
 
 export const badges: Badge[] = [
   {
