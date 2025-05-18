@@ -14,6 +14,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
 }) => {
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState('');
+  const [fileName, setFileName] = useState(`index.${language}`);
   
   useEffect(() => {
     if (initialCode !== code) {
@@ -26,6 +27,47 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
     setCode(newCode);
     if (onCodeChange) {
       onCodeChange(newCode);
+    }
+  };
+
+  // Code suggestions based on language
+  const getCodeSuggestion = () => {
+    switch (language) {
+      case 'html':
+        return `<!-- Try this HTML structure -->
+<div class="container">
+  <h1>Welcome</h1>
+  <p>This is a paragraph</p>
+  <button onclick="alert('Hello!')">Click me</button>
+</div>`;
+      case 'css':
+        return `/* Try these CSS styles */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}`;
+      case 'javascript':
+        return `// Try this JavaScript code
+function greet(name) {
+  return \`Hello, \${name}!\`;
+}
+
+// Add event listener
+document.querySelector('button').addEventListener('click', () => {
+  alert(greet('World'));
+});`;
+      default:
+        return '';
     }
   };
   
@@ -43,8 +85,17 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           <html>
             <head>
               <style>
-                body { font-family: sans-serif; }
-                .output { white-space: pre-wrap; }
+                body { 
+                  font-family: sans-serif;
+                  background: white;
+                  color: black;
+                }
+                .output { 
+                  white-space: pre-wrap;
+                  padding: 10px;
+                  background: white;
+                  border-radius: 4px;
+                }
               </style>
             </head>
             <body>
@@ -94,7 +145,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           <head>
             <style>${code}</style>
           </head>
-          <body>
+          <body style="background: white; color: black; padding: 20px;">
             <div class="box">CSS Box</div>
             <p>Paragraph with <a href="#">link</a></p>
             <button>Button</button>
@@ -116,6 +167,13 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       onCodeChange(initialCode);
     }
   };
+
+  const insertSuggestion = () => {
+    setCode(getCodeSuggestion());
+    if (onCodeChange) {
+      onCodeChange(getCodeSuggestion());
+    }
+  };
   
   // Determine which language-specific styling to use
   const getLanguageClass = () => {
@@ -134,8 +192,22 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   return (
     <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
       <div className={`flex justify-between items-center px-4 py-2 border-b ${getLanguageClass()} bg-gray-50 dark:bg-gray-700`}>
-        <span className="font-medium text-sm">{language.toUpperCase()}</span>
+        <div className="flex items-center space-x-2">
+          <input
+            type="text"
+            value={fileName}
+            onChange={(e) => setFileName(e.target.value)}
+            className="text-sm font-medium bg-transparent border-none focus:outline-none focus:ring-0 w-32"
+          />
+        </div>
         <div className="flex space-x-2">
+          <button 
+            onClick={insertSuggestion}
+            className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-xs"
+            title="Insert code suggestion"
+          >
+            Try Example
+          </button>
           <button 
             onClick={resetCode}
             className="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
@@ -163,16 +235,16 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           />
         </div>
         
-        <div className="h-64 lg:h-80 bg-gray-50 dark:bg-gray-900 overflow-auto">
+        <div className="h-64 lg:h-80 bg-white dark:bg-gray-900 overflow-auto">
           {language === 'html' || language === 'css' ? (
             <iframe
               srcDoc={output}
               title="output"
-              className="w-full h-full border-none"
+              className="w-full h-full border-none bg-white"
               sandbox="allow-scripts"
             />
           ) : (
-            <pre className="p-4 text-sm text-gray-800 dark:text-gray-200">{output}</pre>
+            <pre className="p-4 text-sm text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-900">{output}</pre>
           )}
         </div>
       </div>
