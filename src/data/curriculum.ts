@@ -1186,6 +1186,7 @@ function createCounter() {
           startingCode: `
 function createGame(initialScore) {
   
+  
   // Implement the game factory
 }
 
@@ -1486,6 +1487,91 @@ export const projects: Project[] = [
     ],
     thumbnail: 'https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg',
     xpReward: 150
+  },
+  {
+    id: 'recipe-app',
+    title: 'Recipe Management App',
+    description: 'Create a recipe management application with search, filtering, and favorites.',
+    difficulty: 'intermediate',
+    topics: ['html-basics', 'css-basics', 'javascript-basics'],
+    requirements: [
+      'Recipe CRUD operations',
+      'Search and filter functionality',
+      'Favorite recipes feature',
+      'Recipe categories',
+      'Responsive design',
+      'Local storage for data persistence'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg',
+    xpReward: 150
+  },
+  {
+    id: 'expense-tracker',
+    title: 'Personal Expense Tracker',
+    description: 'Build an expense tracking app with charts and budget management.',
+    difficulty: 'intermediate',
+    topics: ['html-basics', 'css-basics', 'javascript-basics'],
+    requirements: [
+      'Expense and income tracking',
+      'Category management',
+      'Monthly budget setting',
+      'Visual expense reports',
+      'Data persistence',
+      'Export functionality'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/53621/calculator-calculation-insurance-finance-53621.jpeg',
+    xpReward: 175
+  },
+  {
+    id: 'social-dashboard',
+    title: 'Social Media Dashboard',
+    description: 'Create a dashboard to track social media metrics and engagement.',
+    difficulty: 'advanced',
+    topics: ['html-basics', 'css-basics', 'javascript-basics'],
+    requirements: [
+      'Multiple social media integration',
+      'Real-time metrics display',
+      'Engagement analytics',
+      'Custom date ranges',
+      'Data visualization',
+      'Responsive layout'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/907607/pexels-photo-907607.jpeg',
+    xpReward: 200
+  },
+  {
+    id: 'blog-platform',
+    title: 'Blog Publishing Platform',
+    description: 'Develop a full-featured blog platform with markdown support.',
+    difficulty: 'advanced',
+    topics: ['html-basics', 'css-basics', 'javascript-basics'],
+    requirements: [
+      'Markdown editor',
+      'Post categories and tags',
+      'Comment system',
+      'User profiles',
+      'Search functionality',
+      'Responsive design'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/261662/pexels-photo-261662.jpeg',
+    xpReward: 225
+  },
+  {
+    id: 'fitness-tracker',
+    title: 'Fitness Workout Tracker',
+    description: 'Build a workout tracking app with exercise library and progress monitoring.',
+    difficulty: 'intermediate',
+    topics: ['html-basics', 'css-basics', 'javascript-basics'],
+    requirements: [
+      'Exercise database',
+      'Workout planning',
+      'Progress tracking',
+      'Exercise animations',
+      'Workout history',
+      'Goal setting'
+    ],
+    thumbnail: 'https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg',
+    xpReward: 175
   }
 ];
 
