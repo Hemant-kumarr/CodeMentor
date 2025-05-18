@@ -76,51 +76,54 @@ document.querySelector('button').addEventListener('click', () => {
       setOutput(code);
     } else if (language === 'javascript') {
       try {
-        // Create a sandbox for JS execution
         const sandbox = document.createElement('iframe');
         sandbox.style.display = 'none';
         document.body.appendChild(sandbox);
         
         const sandboxContent = `
-          <html>
-            <head>
-              <style>
-                body { 
-                  font-family: sans-serif;
-                  background: white;
-                  color: black;
-                }
-                .output { 
-                  white-space: pre-wrap;
-                  padding: 10px;
-                  background: white;
-                  border-radius: 4px;
-                }
-              </style>
-            </head>
-            <body>
-              <div id="output" class="output"></div>
-              <script>
-                // Capture console.log
-                const originalLog = console.log;
-                const outputs = [];
-                console.log = function(...args) {
-                  originalLog.apply(console, args);
-                  outputs.push(args.map(arg => 
-                    typeof arg === 'object' ? JSON.stringify(arg, null, 2) : arg
-                  ).join(' '));
-                  document.getElementById('output').textContent = outputs.join('\\n');
-                };
-                
-                try {
-                  ${code};
-                } catch (error) {
-                  console.log('Error:', error.message);
-                }
-              </script>
-            </body>
-          </html>
-        `;
+        <html>
+          <head>
+            <style>
+              body { 
+                font-family: sans-serif;
+                margin: 0;
+                padding: 16px;
+                background: white;
+                color: black;
+              }
+              .output { 
+                white-space: pre-wrap;
+                font-family: monospace;
+                background: white;
+                padding: 12px;
+                border-radius: 6px;
+                border: 1px solid #e5e7eb;
+              }
+              * { box-sizing: border-box; }
+            </style>
+          </head>
+          <body>
+            <div id="output" class="output"></div>
+            <script>
+              const originalLog = console.log;
+              const outputs = [];
+              console.log = function(...args) {
+                originalLog.apply(console, args);
+                outputs.push(args.map(arg => 
+                  typeof arg === 'object' ? JSON.stringify(arg, null, 2) : arg
+                ).join(' '));
+                document.getElementById('output').textContent = outputs.join('\\n');
+              };
+              
+              try {
+                ${code};
+              } catch (error) {
+                console.log('Error:', error.message);
+              }
+            </script>
+          </body>
+        </html>
+      `;
         
         sandbox.srcdoc = sandboxContent;
         
@@ -139,23 +142,31 @@ document.querySelector('button').addEventListener('click', () => {
         setOutput(`Error: ${error}`);
       }
     } else if (language === 'css') {
-      // For CSS, create a simple HTML page with the CSS applied
       const htmlWithCSS = `
-        <html>
-          <head>
-            <style>${code}</style>
-          </head>
-          <body style="background: white; color: black; padding: 20px;">
-            <div class="box">CSS Box</div>
-            <p>Paragraph with <a href="#">link</a></p>
-            <button>Button</button>
-            <ul>
-              <li>List item 1</li>
-              <li>List item 2</li>
-            </ul>
-          </body>
-        </html>
-      `;
+      <html>
+        <head>
+          <style>
+            body {
+              font-family: sans-serif;
+              margin: 0;
+              padding: 20px;
+              background: white;
+              color: black;
+            }
+            ${code}
+          </style>
+        </head>
+        <body>
+          <div class="box">CSS Box</div>
+          <p>Paragraph with <a href="#">link</a></p>
+          <button>Button</button>
+          <ul>
+            <li>List item 1</li>
+            <li>List item 2</li>
+          </ul>
+        </body>
+      </html>
+    `;
       setOutput(htmlWithCSS);
     }
   };
